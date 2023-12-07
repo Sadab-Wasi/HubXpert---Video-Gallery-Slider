@@ -96,6 +96,11 @@
             "default": {
               "color": "#002D57",
               "opacity": 100
+            },
+            "inherited_value": {
+              "property_value_paths": {
+                "color": "theme.global_colors.primary.color"
+              }
             }
           },
           {
@@ -114,6 +119,14 @@
               "font_set": "GOOGLE",
               "styles": {},
               "color": "#FFFFFF"
+            },
+            "inherited_value": {
+              "property_value_paths": {
+                "font": "theme.global_fonts.secondary.font",
+                "font_set": "theme.global_fonts.secondary.font_set",
+                "color": "theme.global_fonts.secondary.color",
+                "fallback": "theme.global_fonts.primary.fallback"
+              }
             }
           },
           {
@@ -132,6 +145,14 @@
               "fallback": "sans-serif",
               "font_set": "GOOGLE",
               "color": "#FFFFFF"
+            },
+            "inherited_value": {
+              "property_value_paths": {
+                "font": "theme.global_fonts.secondary.font",
+                "font_set": "theme.global_fonts.secondary.font_set",
+                "color": "theme.global_fonts.secondary.color",
+                "fallback": "theme.global_fonts.primary.fallback"
+              }
             }
           }
         ],
@@ -172,6 +193,11 @@
         "default": {
           "color": "#f5f5f5",
           "opacity": 100
+        },
+        "inherited_value": {
+          "property_value_paths": {
+            "color": "theme.global_colors.primary.color"
+          }
         }
       },
       {

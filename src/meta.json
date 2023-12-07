@@ -1,6 +1,46 @@
 {
+  "content_tags" : [ {
+    "name" : "ANIMATION",
+    "source" : "USER"
+  }, {
+    "name" : "BLOG_POST",
+    "source" : "USER"
+  }, {
+    "name" : "IMAGE",
+    "source" : "USER"
+  }, {
+    "name" : "SLIDER",
+    "source" : "USER"
+  }, {
+    "name" : "VIDEO",
+    "source" : "USER"
+  }, {
+    "name" : "GALLERY",
+    "source" : "USER"
+  }, {
+    "name" : "BRANDING",
+    "source" : "USER"
+  }, {
+    "name" : "BLOG",
+    "source" : "USER"
+  }, {
+    "name" : "INTERACTION",
+    "source" : "USER"
+  }, {
+    "name" : "LAYOUT",
+    "source" : "USER"
+  }, {
+    "name" : "MULTIMEDIA",
+    "source" : "USER"
+  }, {
+    "name" : "SOCIAL",
+    "source" : "USER"
+  } ],
   "global" : false,
+  "inline_help_text" : "Showcase the power of 3D videos sliders in your own websites. Displaying product features, testimonials, events and even your company service. From sites like YouTube, Vimeo, or  Google Drive.",
+  "categories" : [ "BODY_CONTENT", "FUNCTIONALITY", "MEDIA" ],
   "host_template_types" : [ "PAGE", "BLOG_POST", "BLOG_LISTING" ],
   "module_id" : 147551320128,
-  "is_available_for_new_content" : true
+  "label" : "video-gallery-slider",
+  "is_available_for_new_content" : false
 }

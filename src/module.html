@@ -5,76 +5,77 @@
 <!-- ================== -->
 <!-- ====== HTML ====== -->
 <!-- ================== -->
+{# testimonial__header #}
 <section>
-  <div class="head_info" {% if !module.show_header %}hidden{% endif %} >
-    <h1 class="head_title" >{{ module.header_info.header_title }}</h1>
-    <div class="head_desc" >
-      {{ module.header_info.header_description }}
+    <div class="video-gallery-slider__head_info" {% if !module.show_header %}hidden{% endif %} >
+    <h1 class="video-gallery-slider__head_title" >{{ module.header_info.header_title }}</h1>
+    <div class="video-gallery-slider__head_desc" >
+        {{ module.header_info.header_description }}
     </div>
-  </div>
-  <div class="container">
-    <div class="arrows">
-      <div id="btn_left" class="button-left"></div>
-      <div id="btn_right" class="button-right"></div>
+    </div>
+    <div class="video-gallery-slider__container">
+    <div class="video-gallery-slider__arrows">
+        <div id="btn_left" class="video-gallery-slider__button-left"></div>
+        <div id="btn_right" class="video-gallery-slider__button-right"></div>
     </div>
     
     {% for item in module.media_info %}
-      <input type="radio" name="slider" id="item-{{ loop.index }}" {% if loop.first %}checked{% endif %} />
+        <input type="radio" name="slider" id="item-{{ loop.index }}" {% if loop.first %}checked{% endif %} />
     {% endfor %}
     
-    <div class="cards">
+    <div class="video-gallery-slider__cards">
     {% for item in module.media_info %}
 <!--     IF embeded url -->
-      {% if item.input_format == "val_url" %}
+        {% if item.input_format == "val_url" %}
 <!--       IF YouTube video -->
         {% if item.media_url.media_source == "val_yt" %}
-          {% set id_yt = item.media_url.embed_url.oembed_url|split("/") %}
-          {% set id_yt = id_yt[2]|split("?") %}
-          {% set id_yt = id_yt[0] %}
-          <label class="card" for="item-{{ loop.index }}" id="play-{{ loop.index }}">
-            <img class="yt_img" src="http://img.youtube.com/vi/{{id_yt}}/maxresdefault.jpg" loading="lazy" title="{{ item.media_title }}" alt="{{ item.media_title }}" />
-            <div class="youtube-container">
-              <iframe class="yt_vid" src="https://www.youtube.com/embed" title="{{ item.media_title }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            {% set id_yt = item.media_url.embed_url.oembed_url|split("/") %}
+            {% set id_yt = id_yt[2]|split("?") %}
+            {% set id_yt = id_yt[0] %}
+            <label class="video-gallery-slider__card" for="item-{{ loop.index }}" id="play-{{ loop.index }}">
+            <img class="video-gallery-slider__yt_img" src="http://img.youtube.com/vi/{{id_yt}}/maxresdefault.jpg" loading="lazy" title="{{ item.media_title }}" alt="{{ item.media_title }}" />
+            <div class="video-gallery-slider__youtube-container">
+                <iframe class="video-gallery-slider__yt_vid" src="https://www.youtube.com/embed" title="{{ item.media_title }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
-          </label>
+            </label>
         
 <!--       IF Vimeo video -->
         {% elif item.media_url.media_source == "val_vi" %}
-          {% set id_vi = item.media_url.embed_url.oembed_url|split("/") %}
-          {% set id_vi = id_vi[2]|split("?") %}
-          {% set id_vi = id_vi[0] %}
-          <label class="card" for="item-{{ loop.index }}" id="play-{{ loop.index }}">
-            <img class="yt_img" src="https://vumbnail.com/{{id_vi}}.jpg" loading="lazy" title="{{ item.media_title }}" alt="{{ item.media_title }}" />
-            <div class="youtube-container">
-              <iframe class="yt_vid" src="https://www.youtube.com/embed" title="" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+            {% set id_vi = item.media_url.embed_url.oembed_url|split("/") %}
+            {% set id_vi = id_vi[2]|split("?") %}
+            {% set id_vi = id_vi[0] %}
+            <label class="video-gallery-slider__card" for="item-{{ loop.index }}" id="play-{{ loop.index }}">
+            <img class="video-gallery-slider__yt_img" src="https://vumbnail.com/{{id_vi}}.jpg" loading="lazy" title="{{ item.media_title }}" alt="{{ item.media_title }}" />
+            <div class="video-gallery-slider__youtube-container">
+                <iframe class="video-gallery-slider__yt_vid" src="https://www.youtube.com/embed" title="" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
             </div>
-          </label>
+            </label>
         
 <!--       IF G-Drive video -->
         {% elif item.media_url.media_source == "val_gd" %}
-          {% set id_gd = item.media_url.google_shared_link.href|split("/") %}
-          {% set id_gd = id_gd[4] %}
-          <label class="card" for="item-{{ loop.index }}" id="play-{{ loop.index }}">
-            <img class="yt_img" src="{{ item.media_url.thumbnail_image.src }}" google_id="{{id_gd}}" title="{{ item.media_title }}" alt="{{ item.media_url.thumbnail_image.alt }}" />
-            <div class="youtube-container">
-              <iframe class="yt_vid" src="https://www.youtube.com/embed" title="{{ item.media_title }}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+            {% set id_gd = item.media_url.google_shared_link.href|split("/") %}
+            {% set id_gd = id_gd[4] %}
+            <label class="video-gallery-slider__card" for="item-{{ loop.index }}" id="play-{{ loop.index }}">
+            <img class="video-gallery-slider__yt_img" src="{{ item.media_url.thumbnail_image.src }}" google_id="{{id_gd}}" title="{{ item.media_title }}" alt="{{ item.media_url.thumbnail_image.alt }}" />
+            <div class="video-gallery-slider__youtube-container">
+                <iframe class="video-gallery-slider__yt_vid" src="https://www.youtube.com/embed" title="{{ item.media_title }}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
             </div>
-          </label>
-          
+            </label>
+            
         {% endif %}
         
 <!--     IF embeded code -->
-      {% else %}
-          <label class="card" for="item-{{ loop.index }}" id="play-{{ loop.index }}" code="TRUE" >
-            <img class="yt_img" src="{{ item.embed_image.src }}" alt="{{ item.embed_image.alt }}" />
-            <div class="youtube-container yt_vid">
-              {{ item.embed_code.embed_html }}
+        {% else %}
+            <label class="video-gallery-slider__card" for="item-{{ loop.index }}" id="play-{{ loop.index }}" code="TRUE" >
+            <img class="video-gallery-slider__yt_img" src="{{ item.embed_image.src }}" alt="{{ item.embed_image.alt }}" />
+            <div class="video-gallery-slider__youtube-container video-gallery-slider__yt_vid">
+                {{ item.embed_code.embed_html }}
             </div>
-          </label>
-      {% endif %}
+            </label>
+        {% endif %}
     {% endfor %}
     </div>
-  </div>
+    </div>
 </section>
 
 
@@ -83,13 +84,13 @@
 <!-- ================= -->
 {% require_css %}
 <style>
-  * {
+    * {
     box-sizing: border-box;
-  }
-  
+    }
+    
 /*   Arrow Styling =============================================== */
-  .button-left,
-  .button-right {
+    .video-gallery-slider__button-left,
+    .video-gallery-slider__button-right {
     content: "";
     position: absolute;
     padding: 0px;
@@ -103,32 +104,32 @@
     top: calc(50% - 25px);
     opacity: 0.2;
     transition: all 0.1s ease;
-  }
-  .button-left {
+    }
+    .video-gallery-slider__button-left {
     left: 2%;
-  }
-  .button-right {
+    }
+    .video-gallery-slider__button-right {
     right: 2%;
-  }
-  /* For tablets: */
-  @media only screen and (max-width: 768px) {
-    .button-left, .button-right {
-      top: calc(50% - 20px);
-      height: 40px;
-      width: 40px;
     }
-  }
-  /* For mobile phones: */
-  @media only screen and (max-width: 600px) {
-    .button-left, .button-right {
-      top: calc(50% - 11px);
-      height: 30px;
-      width: 30px;
+    /* For tablets: */
+    @media only screen and (max-width: 768px) {
+    .video-gallery-slider__button-left, .video-gallery-slider__button-right {
+        top: calc(50% - 20px);
+        height: 40px;
+        width: 40px;
     }
-  }
-  
-  .button-left::after,
-  .button-right::after {
+    }
+    /* For mobile phones: */
+    @media only screen and (max-width: 600px) {
+    .video-gallery-slider__button-left, .video-gallery-slider__button-right {
+        top: calc(50% - 11px);
+        height: 30px;
+        width: 30px;
+    }
+    }
+    
+    .video-gallery-slider__button-left::after,
+    .video-gallery-slider__button-right::after {
     content: "";
     position: absolute;
     z-index: 101;
@@ -138,80 +139,80 @@
     border-top: 2px solid #fff;
     border-left: 2px solid #fff;
     transition: all 0.1s ease;
-  }
-  .button-left::after {
+    }
+    .video-gallery-slider__button-left::after {
     top: 12px;
     left: 17px;
     transform: rotate(-45deg);
-  }
-  .button-right::after {
+    }
+    .video-gallery-slider__button-right::after {
     top: 12px;
     left: 8px;
     transform: rotate(-225deg);
-  }
-  /* For tablets: */
-  @media only screen and (max-width: 768px) {
-    .button-left::after, .button-right::after {
-      width: 15px;
-      height: 15px;
     }
-    .button-left::after {
-      top: 11px;
-      left: 15px;
+    /* For tablets: */
+    @media only screen and (max-width: 768px) {
+    .video-gallery-slider__button-left::after, .video-gallery-slider__button-right::after {
+        width: 15px;
+        height: 15px;
     }
-    .button-right::after {
-      top: 11px;
-      left: 8px;
+    .video-gallery-slider__button-left::after {
+        top: 11px;
+        left: 15px;
     }
-  }
-  /* For mobile phones: */
-  @media only screen and (max-width: 600px) {
-    .button-left::after, .button-right::after {
-      width: 12px;
-      height: 12px;
+    .video-gallery-slider__button-right::after {
+        top: 11px;
+        left: 8px;
     }
-    .button-left::after {
-      top: 8px;
-      left: 10px;
     }
-    .button-right::after {
-      top: 8px;
-      left: 8px;
+    /* For mobile phones: */
+    @media only screen and (max-width: 600px) {
+    .video-gallery-slider__button-left::after, .video-gallery-slider__button-right::after {
+        width: 12px;
+        height: 12px;
     }
-  }
+    .video-gallery-slider__button-left::after {
+        top: 8px;
+        left: 10px;
+    }
+    .video-gallery-slider__button-right::after {
+        top: 8px;
+        left: 8px;
+    }
+    }
 
-/*   .button-left:hover {
+    /* .video-gallery-slider__button-left:hover {
     transform: translate3d(10px, 0, 0);
-  }
-  .button-right:hover {
+    }
+    .video-gallery-slider__button-right:hover {
     transform: translate3d(-10px, 0, 0);
-  } */
-  .button-left:active {
+    } */
+    .video-gallery-slider__button-left:active {
     transform: translate(-10px, 0);
-  }
-  .button-right:active {
+    }
+    .video-gallery-slider__button-right:active {
     transform: translate(10px, 0%);
-  }
-  
-  
+    }
+    
+    
 /*   Header Styling =============================================== */
-  .head_info {
+    .video-gallery-slider__head_info {
     background-color:rgba({{ module.style.header_style.background_color.color|convert_rgb }}, {{ module.style.header_style.background_color.opacity|int / 100 }});
     border-radius: 10px; 
     padding-bottom:30px; 
     margin-bottom:-20px;
-  }
-  
-  .head_title {
+    }
+    
+    .video-gallery-slider__head_title {
     padding-top:10px;
     text-align: center; 
     font-family: {{ module.style.header_style.text_font.font }}; 
     {{ module.style.header_style.text_font.style }}; 
     color: {{ module.style.header_style.text_font.color }}; 
     font-size: {{ module.style.header_style.text_font.size }}px;
-  }
-  
-  .head_desc {
+    }
+    
+    .video-gallery-slider__head_desc {
     text-align: center;
     padding-left:30px; 
     padding-right:30px;
@@ -219,11 +220,11 @@
     {{ module.style.header_style.description_font.style }}; 
     color: {{ module.style.header_style.description_font.color }}; 
     font-size: {{ module.style.header_style.description_font.size }}px;
-  }
-  
-  
+    }
+    
+    
 /*   CarVideo Styling =============================================== */
-  .container {
+    .video-gallery-slider__container {
     width: 100%;
     height: 100%;
     transform-style: preserve-3d;
@@ -235,33 +236,33 @@
     padding: 20px;
     border-radius: 10px;
     background-color: rgba({{ module.style.background_color.color|convert_rgb }}, {{ module.style.background_color.opacity|int / 100 }});
-  }
+    }
 
-  input[type="radio"] {
+    input[type="radio"] {
     display: none;
-  }
+    }
 
-  .cards {
+    .video-gallery-slider__cards {
     position: relative;
     width: calc(320px * {{ module.style.video_size }});
     height: calc(180px * {{ module.style.video_size }});
-  }
-  /* For tablets: */
-  @media only screen and (max-width: 768px) {
-    .cards {
-      width: calc(699/933*320px * {{ module.style.video_size }});
-      height: calc(699/933*180px * {{ module.style.video_size }});
     }
-  }
-  /* For mobile phones: */
-  @media only screen and (max-width: 600px) {
-    .cards {
-      width: calc(325/933*320px * {{ module.style.video_size }});
-      height: calc(325/933*180px * {{ module.style.video_size }});
+    /* For tablets: */
+    @media only screen and (max-width: 768px) {
+    .video-gallery-slider__cards {
+        width: calc(699/933*320px * {{ module.style.video_size }});
+        height: calc(699/933*180px * {{ module.style.video_size }});
     }
-  }
+    }
+    /* For mobile phones: */
+    @media only screen and (max-width: 600px) {
+    .video-gallery-slider__cards {
+        width: calc(325/933*320px * {{ module.style.video_size }});
+        height: calc(325/933*180px * {{ module.style.video_size }});
+    }
+    }
 
-  .card {
+    .video-gallery-slider__card {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -273,9 +274,9 @@
     opacity: 0;
     z-index: -2;
     cursor: pointer;
-  }
+    }
 
-  img {
+    img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -285,528 +286,528 @@
     border-radius: 10px;
     transition: all 1s ease;
     opacity: 1;
-  }
+    }
 
-  .youtube-container {
+    .video-gallery-slider__youtube-container {
     overflow: hidden;
     width: 100%;
     aspect-ratio: 16/9;
 /*     background-color: #000; */
-  }
+    }
 
-  iframe {
+    iframe {
     width: 100%;
     height: 100%;
     max-height: 100%;
     max-width: 100%;
     display: block;
     border-radius: 10px;
-  }
-  
+    }
+    
 /*   display style 7 -------------------------------------------- */
-  {% set go_X = module.style.view_7_setup.shift_horizontally|int %}
-  {% set go_H = module.style.view_7_setup.adjust_size|int %}
-  {% set go_T = 4.2 %}
-  {% if display_videos == 7 %}
+    {% set go_X = module.style.view_7_setup.shift_horizontally|int %}
+    {% set go_H = module.style.view_7_setup.adjust_size|int %}
+    {% set go_T = 4.2 %}
+    {% if display_videos == 7 %}
     {% if count_videos > display_videos %}
 /*       hide others */
-      input[type="radio"] ~ .cards {
+        input[type="radio"] ~ .video-gallery-slider__cards {
         transform: translate(0%, 0%) scale(1) skew(0deg, 0deg);
         opacity: 1;
         z-index: -1;
         visibility: hidden;
         transition: all 0s ease;
-      }
+        }
 
 /*       right 4 */
-      {% for item in module.media_info %}
+        {% for item in module.media_info %}
         {% set itemID = loop.index %}
         {% set playID = loop.index|int + 4 %}
         {% if playID > display_videos %}
-          {% if count_videos <= display_videos %}
+            {% if count_videos <= display_videos %}
             {% set playID = playID - display_videos %}
-          {% elif count_videos == display_videos + 1 %}
+            {% elif count_videos == display_videos + 1 %}
             {% set playID = playID - display_videos - 1 %}
-          {% elif playID > count_videos %}
+            {% elif playID > count_videos %}
             {% set playID = playID - count_videos %}
-          {% endif %}
+            {% endif %}
         {% endif %}
-        #item-{{ itemID }}:checked ~ .cards #play-{{ playID }}{% if !loop.last %},{% endif %}
-      {% endfor %} {
+        #item-{{ itemID }}:checked ~ .video-gallery-slider__cards #play-{{ playID }}{% if !loop.last %},{% endif %}
+        {% endfor %} {
         transform: translate({{4*go_X}}%, -5%) scale({{1-4*go_H/100}}) skew(0deg, {{go_T}}deg);
         opacity: 0;
         z-index: 0;
         visibility: hidden;
         transition: all 0.4s ease;
-      }
+        }
 
 /*       left 4 */
-      {% for item in module.media_info %}
+        {% for item in module.media_info %}
         {% set itemID = loop.index %}
         {% set playID = loop.index|int - 3 %}
         {% if playID < 1 %}
-          {% if count_videos <= display_videos %}
+            {% if count_videos <= display_videos %}
             {% set playID = display_videos + playID %}
-          {% elif count_videos == display_videos + 1 %}
+            {% elif count_videos == display_videos + 1 %}
             {% set playID = 1 + display_videos - playID %}
-          {% elif playID < 1 %}
+            {% elif playID < 1 %}
             {% set playID = count_videos + playID %}
-          {% endif %}
+            {% endif %}
         {% endif %}
-        #item-{{ itemID }}:checked ~ .cards #play-{{ playID }}{% if !loop.last %},{% endif %}
-      {% endfor %} {
+        #item-{{ itemID }}:checked ~ .video-gallery-slider__cards #play-{{ playID }}{% if !loop.last %},{% endif %}
+        {% endfor %} {
         transform: translate(-{{4*go_X}}%, -5%) scale({{1-4*go_H/100}}) skew(0deg, -{{go_T}}deg);
         opacity: 0;
         z-index: 0;
         visibility: hidden;
         transition: all 0.4s ease;
-      }
+        }
 
     {% endif %}
 
 /*     right 3 */
     {% for item in module.media_info %}
-      {% set itemID = loop.index %}
-      {% set playID = loop.index|int + 3 %}
-      {% if playID > display_videos %}
+        {% set itemID = loop.index %}
+        {% set playID = loop.index|int + 3 %}
+        {% if playID > display_videos %}
         {% if count_videos <= display_videos %}
-          {% set playID = playID - display_videos %}
+            {% set playID = playID - display_videos %}
         {% elif count_videos == display_videos + 1 %}
-          {% set playID = playID - display_videos - 1 %}
+            {% set playID = playID - display_videos - 1 %}
         {% elif playID > count_videos %}
-          {% set playID = playID - count_videos %}
+            {% set playID = playID - count_videos %}
         {% endif %}
-      {% endif %}
-      #item-{{ itemID }}:checked ~ .cards #play-{{ playID }}{% if !loop.last %},{% endif %}
+        {% endif %}
+        #item-{{ itemID }}:checked ~ .video-gallery-slider__cards #play-{{ playID }}{% if !loop.last %},{% endif %}
     {% endfor %} {
-      transform: translate({{3*go_X}}%, -5%) scale({{1-3*go_H/100}}) skew(0deg, {{go_T}}deg);
-      opacity: 0.25;
-      z-index: 0;
-      visibility: visible;
-      transition: all 0.4s ease;
+        transform: translate({{3*go_X}}%, -5%) scale({{1-3*go_H/100}}) skew(0deg, {{go_T}}deg);
+        opacity: 0.25;
+        z-index: 0;
+        visibility: visible;
+        transition: all 0.4s ease;
     }
 
 /*     right 2 */
     {% for item in module.media_info %}
-      {% set itemID = loop.index %}
-      {% set playID = loop.index|int + 2 %}
-      {% if playID > display_videos %}
+        {% set itemID = loop.index %}
+        {% set playID = loop.index|int + 2 %}
+        {% if playID > display_videos %}
         {% if count_videos <= display_videos %}
-          {% set playID = playID - display_videos %}
+            {% set playID = playID - display_videos %}
         {% elif count_videos == display_videos + 1 %}
-          {% set playID = playID - display_videos - 1 %}
+            {% set playID = playID - display_videos - 1 %}
         {% elif playID > count_videos %}
-          {% set playID = playID - count_videos %}
+            {% set playID = playID - count_videos %}
         {% endif %}
-      {% endif %}
-      #item-{{ itemID }}:checked ~ .cards #play-{{ playID }}{% if !loop.last %},{% endif %}
+        {% endif %}
+        #item-{{ itemID }}:checked ~ .video-gallery-slider__cards #play-{{ playID }}{% if !loop.last %},{% endif %}
     {% endfor %} {
-      transform: translate({{2*go_X}}%, -5%) scale({{1-2*go_H/100}}) skew(0deg, {{go_T}}deg);
-      opacity: 0.5;
-      z-index: 1;
-      visibility: visible;
-      transition: all 0.4s ease;
+        transform: translate({{2*go_X}}%, -5%) scale({{1-2*go_H/100}}) skew(0deg, {{go_T}}deg);
+        opacity: 0.5;
+        z-index: 1;
+        visibility: visible;
+        transition: all 0.4s ease;
     }
 
 /*     right 1 */
     {% for item in module.media_info %}
-      {% set itemID = loop.index %}
-      {% set playID = loop.index|int + 1 %}
-      {% if playID > display_videos %}
+        {% set itemID = loop.index %}
+        {% set playID = loop.index|int + 1 %}
+        {% if playID > display_videos %}
         {% if count_videos <= display_videos %}
-          {% set playID = playID - display_videos %}
+            {% set playID = playID - display_videos %}
         {% elif count_videos == display_videos + 1 %}
-          {% set playID = playID - display_videos - 1 %}
+            {% set playID = playID - display_videos - 1 %}
         {% elif playID > count_videos %}
-          {% set playID = playID - count_videos %}
+            {% set playID = playID - count_videos %}
         {% endif %}
-      {% endif %}
-      #item-{{ itemID }}:checked ~ .cards #play-{{ playID }}{% if !loop.last %},{% endif %}
+        {% endif %}
+        #item-{{ itemID }}:checked ~ .video-gallery-slider__cards #play-{{ playID }}{% if !loop.last %},{% endif %}
     {% endfor %} {
-      transform: translate({{go_X}}%, -5%) scale({{1-go_H/100}}) skew(0deg, {{go_T}}deg);
-      opacity: 0.75;
-      z-index: 2;
-      visibility: visible;
-      transition: all 0.4s ease;
+        transform: translate({{go_X}}%, -5%) scale({{1-go_H/100}}) skew(0deg, {{go_T}}deg);
+        opacity: 0.75;
+        z-index: 2;
+        visibility: visible;
+        transition: all 0.4s ease;
     }
 
 /*     center */
     {% for item in module.media_info %}
-      {% set itemID = loop.index %}
-      {% set playID = loop.index %}
-      #item-{{ itemID }}:checked ~ .cards #play-{{ playID }}{% if !loop.last %},{% endif %}
+        {% set itemID = loop.index %}
+        {% set playID = loop.index %}
+        #item-{{ itemID }}:checked ~ .video-gallery-slider__cards #play-{{ playID }}{% if !loop.last %},{% endif %}
     {% endfor %} {
-      transform: translate(0, 0) scale(1) skew(0, 0);
-      opacity: 1;
-      z-index: 3;
-      visibility: visible;
-      transition: all 0.4s ease;
+        transform: translate(0, 0) scale(1) skew(0, 0);
+        opacity: 1;
+        z-index: 3;
+        visibility: visible;
+        transition: all 0.4s ease;
     }
 
 /*     left 1 */
     {% for item in module.media_info %}
-      {% set itemID = loop.index %}
-      {% set playID = loop.index|int - 1 %}
-      {% if playID < 1 %}
+        {% set itemID = loop.index %}
+        {% set playID = loop.index|int - 1 %}
+        {% if playID < 1 %}
         {% if count_videos <= display_videos %}
-          {% set playID = display_videos + playID %}
+            {% set playID = display_videos + playID %}
         {% elif count_videos == display_videos + 1 %}
-          {% set playID = 1 + display_videos - playID %}
+            {% set playID = 1 + display_videos - playID %}
         {% elif playID < 1 %}
-          {% set playID = count_videos + playID %}
+            {% set playID = count_videos + playID %}
         {% endif %}
-      {% endif %}
-      #item-{{ itemID }}:checked ~ .cards #play-{{ playID }}{% if !loop.last %},{% endif %}
+        {% endif %}
+        #item-{{ itemID }}:checked ~ .video-gallery-slider__cards #play-{{ playID }}{% if !loop.last %},{% endif %}
     {% endfor %} {
-      transform: translate(-{{go_X}}%, -5%) scale({{1-go_H/100}}) skew(0deg, -{{go_T}}deg);
-      opacity: 0.75;
-      z-index: 2;
-      visibility: visible;
-      transition: all 0.4s ease;
+        transform: translate(-{{go_X}}%, -5%) scale({{1-go_H/100}}) skew(0deg, -{{go_T}}deg);
+        opacity: 0.75;
+        z-index: 2;
+        visibility: visible;
+        transition: all 0.4s ease;
     }
 
 /*     left 2 */
     {% for item in module.media_info %}
-      {% set itemID = loop.index %}
-      {% set playID = loop.index|int - 2 %}
-      {% if playID < 1 %}
+        {% set itemID = loop.index %}
+        {% set playID = loop.index|int - 2 %}
+        {% if playID < 1 %}
         {% if count_videos <= display_videos %}
-          {% set playID = display_videos + playID %}
+            {% set playID = display_videos + playID %}
         {% elif count_videos == display_videos + 1 %}
-          {% set playID = 1 + display_videos - playID %}
+            {% set playID = 1 + display_videos - playID %}
         {% elif playID < 1 %}
-          {% set playID = count_videos + playID %}
+            {% set playID = count_videos + playID %}
         {% endif %}
-      {% endif %}
-      #item-{{ itemID }}:checked ~ .cards #play-{{ playID }}{% if !loop.last %},{% endif %}
+        {% endif %}
+        #item-{{ itemID }}:checked ~ .video-gallery-slider__cards #play-{{ playID }}{% if !loop.last %},{% endif %}
     {% endfor %} {
-      transform: translate(-{{2*go_X}}%, -5%) scale({{1-2*go_H/100}}) skew(0deg, -{{go_T}}deg);
-      opacity: 0.5;
-      z-index: 1;
-      visibility: visible;
-      transition: all 0.4s ease;
+        transform: translate(-{{2*go_X}}%, -5%) scale({{1-2*go_H/100}}) skew(0deg, -{{go_T}}deg);
+        opacity: 0.5;
+        z-index: 1;
+        visibility: visible;
+        transition: all 0.4s ease;
     }
 
 /*     left 3 */
     {% for item in module.media_info %}
-      {% set itemID = loop.index %}
-      {% set playID = loop.index|int - 3 %}
-      {% if playID < 1 %}
+        {% set itemID = loop.index %}
+        {% set playID = loop.index|int - 3 %}
+        {% if playID < 1 %}
         {% if count_videos <= display_videos %}
-          {% set playID = display_videos + playID %}
+            {% set playID = display_videos + playID %}
         {% elif count_videos == display_videos + 1 %}
-          {% set playID = 1 + display_videos - playID %}
+            {% set playID = 1 + display_videos - playID %}
         {% elif playID < 1 %}
-          {% set playID = count_videos + playID %}
+            {% set playID = count_videos + playID %}
         {% endif %}
-      {% endif %}
-      #item-{{ itemID }}:checked ~ .cards #play-{{ playID }}{% if !loop.last %},{% endif %}
+        {% endif %}
+        #item-{{ itemID }}:checked ~ .video-gallery-slider__cards #play-{{ playID }}{% if !loop.last %},{% endif %}
     {% endfor %} {
-      transform: translate(-{{3*go_X}}%, -5%) scale({{1-3*go_H/100}}) skew(0deg, -{{go_T}}deg);
-      opacity: 0.25;
-      z-index: 0;
-      visibility: visible;
-      transition: all 0.4s ease;
+        transform: translate(-{{3*go_X}}%, -5%) scale({{1-3*go_H/100}}) skew(0deg, -{{go_T}}deg);
+        opacity: 0.25;
+        z-index: 0;
+        visibility: visible;
+        transition: all 0.4s ease;
     }
 
-  {% endif %}
-  
+    {% endif %}
+    
 /*   display style 5 -------------------------------------------- */
-  {% set go_X = module.style.view_5_setup.shift_horizontally|int %}
-  {% set go_H = module.style.view_5_setup.adjust_size|int %}
-  {% set go_T = 4.2 %}
-  {% if display_videos == 5 %}
+    {% set go_X = module.style.view_5_setup.shift_horizontally|int %}
+    {% set go_H = module.style.view_5_setup.adjust_size|int %}
+    {% set go_T = 4.2 %}
+    {% if display_videos == 5 %}
     {% if count_videos > display_videos %}
 /*       hide others */
-      input[type="radio"] ~ .cards {
+        input[type="radio"] ~ .video-gallery-slider__cards {
         transform: translate(0%, 0%) scale(1) skew(0deg, 0deg);
         opacity: 1;
         z-index: -1;
         visibility: hidden;
         transition: all 0s ease;
-      }
+        }
 
 /*       right 3 */
-      {% for item in module.media_info %}
+        {% for item in module.media_info %}
         {% set itemID = loop.index %}
         {% set playID = loop.index|int + 3 %}
         {% if playID > display_videos %}
-          {% if count_videos <= display_videos %}
+            {% if count_videos <= display_videos %}
             {% set playID = playID - display_videos %}
-          {% elif count_videos == display_videos + 1 %}
+            {% elif count_videos == display_videos + 1 %}
             {% set playID = playID - display_videos - 1 %}
-          {% elif playID > count_videos %}
+            {% elif playID > count_videos %}
             {% set playID = playID - count_videos %}
-          {% endif %}
+            {% endif %}
         {% endif %}
-        #item-{{ itemID }}:checked ~ .cards #play-{{ playID }}{% if !loop.last %},{% endif %}
-      {% endfor %} {
+        #item-{{ itemID }}:checked ~ .video-gallery-slider__cards #play-{{ playID }}{% if !loop.last %},{% endif %}
+        {% endfor %} {
         transform: translate({{3*go_X}}%, -5%) scale({{1-3*go_H/100}}) skew(0deg, {{go_T}}deg);
         opacity: 0;
         z-index: 0;
         visibility: hidden;
         transition: all 0.4s ease;
-      }
+        }
 
 /*       left 3 */
-      {% for item in module.media_info %}
+        {% for item in module.media_info %}
         {% set itemID = loop.index %}
         {% set playID = loop.index|int - 3 %}
         {% if playID < 1 %}
-          {% if count_videos <= display_videos %}
+            {% if count_videos <= display_videos %}
             {% set playID = display_videos + playID %}
-          {% elif count_videos == display_videos + 1 %}
+            {% elif count_videos == display_videos + 1 %}
             {% set playID = 1 + display_videos - playID %}
-          {% elif playID < 1 %}
+            {% elif playID < 1 %}
             {% set playID = count_videos + playID %}
-          {% endif %}
+            {% endif %}
         {% endif %}
-        #item-{{ itemID }}:checked ~ .cards #play-{{ playID }}{% if !loop.last %},{% endif %}
-      {% endfor %} {
+        #item-{{ itemID }}:checked ~ .video-gallery-slider__cards #play-{{ playID }}{% if !loop.last %},{% endif %}
+        {% endfor %} {
         transform: translate(-{{3*go_X}}%, -5%) scale({{1-3*go_H/100}}) skew(0deg, -{{go_T}}deg);
         opacity: 0;
         z-index: 0;
         visibility: hidden;
         transition: all 0.4s ease;
-      }
+        }
 
     {% endif %}
 
 /*     right 2 */
     {% for item in module.media_info %}
-      {% set itemID = loop.index %}
-      {% set playID = loop.index|int + 2 %}
-      {% if playID > display_videos %}
+        {% set itemID = loop.index %}
+        {% set playID = loop.index|int + 2 %}
+        {% if playID > display_videos %}
         {% if count_videos <= display_videos %}
-          {% set playID = playID - display_videos %}
+            {% set playID = playID - display_videos %}
         {% elif count_videos == display_videos + 1 %}
-          {% set playID = playID - display_videos - 1 %}
+            {% set playID = playID - display_videos - 1 %}
         {% elif playID > count_videos %}
-          {% set playID = playID - count_videos %}
+            {% set playID = playID - count_videos %}
         {% endif %}
-      {% endif %}
-      #item-{{ itemID }}:checked ~ .cards #play-{{ playID }}{% if !loop.last %},{% endif %}
+        {% endif %}
+        #item-{{ itemID }}:checked ~ .video-gallery-slider__cards #play-{{ playID }}{% if !loop.last %},{% endif %}
     {% endfor %} {
-      transform: translate({{2*go_X}}%, -5%) scale({{1-2*go_H/100}}) skew(0deg, {{go_T}}deg);
-      opacity: 0.4;
-      z-index: 1;
-      visibility: visible;
-      transition: all 0.4s ease;
+        transform: translate({{2*go_X}}%, -5%) scale({{1-2*go_H/100}}) skew(0deg, {{go_T}}deg);
+        opacity: 0.4;
+        z-index: 1;
+        visibility: visible;
+        transition: all 0.4s ease;
     }
 
 /*     right 1 */
     {% for item in module.media_info %}
-      {% set itemID = loop.index %}
-      {% set playID = loop.index|int + 1 %}
-      {% if playID > display_videos %}
+        {% set itemID = loop.index %}
+        {% set playID = loop.index|int + 1 %}
+        {% if playID > display_videos %}
         {% if count_videos <= display_videos %}
-          {% set playID = playID - display_videos %}
+            {% set playID = playID - display_videos %}
         {% elif count_videos == display_videos + 1 %}
-          {% set playID = playID - display_videos - 1 %}
+            {% set playID = playID - display_videos - 1 %}
         {% elif playID > count_videos %}
-          {% set playID = playID - count_videos %}
+            {% set playID = playID - count_videos %}
         {% endif %}
-      {% endif %}
-      #item-{{ itemID }}:checked ~ .cards #play-{{ playID }}{% if !loop.last %},{% endif %}
+        {% endif %}
+        #item-{{ itemID }}:checked ~ .video-gallery-slider__cards #play-{{ playID }}{% if !loop.last %},{% endif %}
     {% endfor %} {
-      transform: translate({{go_X}}%, -5%) scale({{1-go_H/100}}) skew(0deg, {{go_T}}deg);
-      opacity: 0.8;
-      z-index: 2;
-      visibility: visible;
-      transition: all 0.4s ease;
+        transform: translate({{go_X}}%, -5%) scale({{1-go_H/100}}) skew(0deg, {{go_T}}deg);
+        opacity: 0.8;
+        z-index: 2;
+        visibility: visible;
+        transition: all 0.4s ease;
     }
 
 /*     center */
     {% for item in module.media_info %}
-      {% set itemID = loop.index %}
-      {% set playID = loop.index %}
-      #item-{{ itemID }}:checked ~ .cards #play-{{ playID }}{% if !loop.last %},{% endif %}
+        {% set itemID = loop.index %}
+        {% set playID = loop.index %}
+        #item-{{ itemID }}:checked ~ .video-gallery-slider__cards #play-{{ playID }}{% if !loop.last %},{% endif %}
     {% endfor %} {
-      transform: translate(0, 0) scale(1) skew(0, 0);
-      opacity: 1;
-      z-index: 3;
-      visibility: visible;
-      transition: all 0.4s ease;
+        transform: translate(0, 0) scale(1) skew(0, 0);
+        opacity: 1;
+        z-index: 3;
+        visibility: visible;
+        transition: all 0.4s ease;
     }
 
 /*     left 1 */
     {% for item in module.media_info %}
-      {% set itemID = loop.index %}
-      {% set playID = loop.index|int - 1 %}
-      {% if playID < 1 %}
+        {% set itemID = loop.index %}
+        {% set playID = loop.index|int - 1 %}
+        {% if playID < 1 %}
         {% if count_videos <= display_videos %}
-          {% set playID = display_videos + playID %}
+            {% set playID = display_videos + playID %}
         {% elif count_videos == display_videos + 1 %}
-          {% set playID = 1 + display_videos - playID %}
+            {% set playID = 1 + display_videos - playID %}
         {% elif playID < 1 %}
-          {% set playID = count_videos + playID %}
+            {% set playID = count_videos + playID %}
         {% endif %}
-      {% endif %}
-      #item-{{ itemID }}:checked ~ .cards #play-{{ playID }}{% if !loop.last %},{% endif %}
+        {% endif %}
+        #item-{{ itemID }}:checked ~ .video-gallery-slider__cards #play-{{ playID }}{% if !loop.last %},{% endif %}
     {% endfor %} {
-      transform: translate(-{{go_X}}%, -5%) scale({{1-go_H/100}}) skew(0deg, -{{go_T}}deg);
-      opacity: 0.8;
-      z-index: 2;
-      visibility: visible;
-      transition: all 0.4s ease;
+        transform: translate(-{{go_X}}%, -5%) scale({{1-go_H/100}}) skew(0deg, -{{go_T}}deg);
+        opacity: 0.8;
+        z-index: 2;
+        visibility: visible;
+        transition: all 0.4s ease;
     }
 
 /*     left 2 */
     {% for item in module.media_info %}
-      {% set itemID = loop.index %}
-      {% set playID = loop.index|int - 2 %}
-      {% if playID < 1 %}
+        {% set itemID = loop.index %}
+        {% set playID = loop.index|int - 2 %}
+        {% if playID < 1 %}
         {% if count_videos <= display_videos %}
-          {% set playID = display_videos + playID %}
+            {% set playID = display_videos + playID %}
         {% elif count_videos == display_videos + 1 %}
-          {% set playID = 1 + display_videos - playID %}
+            {% set playID = 1 + display_videos - playID %}
         {% elif playID < 1 %}
-          {% set playID = count_videos + playID %}
+            {% set playID = count_videos + playID %}
         {% endif %}
-      {% endif %}
-      #item-{{ itemID }}:checked ~ .cards #play-{{ playID }}{% if !loop.last %},{% endif %}
+        {% endif %}
+        #item-{{ itemID }}:checked ~ .video-gallery-slider__cards #play-{{ playID }}{% if !loop.last %},{% endif %}
     {% endfor %} {
-      transform: translate(-{{2*go_X}}%, -5%) scale({{1-2*go_H/100}}) skew(0deg, -{{go_T}}deg);
-      opacity: 0.4;
-      z-index: 1;
-      visibility: visible;
-      transition: all 0.4s ease;
+        transform: translate(-{{2*go_X}}%, -5%) scale({{1-2*go_H/100}}) skew(0deg, -{{go_T}}deg);
+        opacity: 0.4;
+        z-index: 1;
+        visibility: visible;
+        transition: all 0.4s ease;
     }
 
-  {% endif %}
-  
+    {% endif %}
+    
 /*   display style 3 -------------------------------------------- */
-  {% set go_X = module.style.view_3_setup.shift_horizontally|int %}
-  {% set go_H = module.style.view_3_setup.adjust_size|int %}
-  {% set go_T = 4.2 %}
-  {% if display_videos == 3 %}
+    {% set go_X = module.style.view_3_setup.shift_horizontally|int %}
+    {% set go_H = module.style.view_3_setup.adjust_size|int %}
+    {% set go_T = 4.2 %}
+    {% if display_videos == 3 %}
     {% if count_videos > display_videos %}
 /*       hide others */
-      input[type="radio"] ~ .cards {
+        input[type="radio"] ~ .video-gallery-slider__cards {
         transform: translate(0%, 0%) scale(1) skew(0deg, 0deg);
         opacity: 1;
         z-index: -1;
         visibility: hidden;
         transition: all 0s ease;
-      }
+        }
 
 /*       right 2 */
-      {% for item in module.media_info %}
+        {% for item in module.media_info %}
         {% set itemID = loop.index %}
         {% set playID = loop.index|int + 2 %}
         {% if playID > display_videos %}
-          {% if count_videos <= display_videos %}
+            {% if count_videos <= display_videos %}
             {% set playID = playID - display_videos %}
-          {% elif count_videos == display_videos + 1 %}
+            {% elif count_videos == display_videos + 1 %}
             {% set playID = playID - display_videos - 1 %}
-          {% elif playID > count_videos %}
+            {% elif playID > count_videos %}
             {% set playID = playID - count_videos %}
-          {% endif %}
+            {% endif %}
         {% endif %}
-        #item-{{ itemID }}:checked ~ .cards #play-{{ playID }}{% if !loop.last %},{% endif %}
-      {% endfor %} {
+        #item-{{ itemID }}:checked ~ .video-gallery-slider__cards #play-{{ playID }}{% if !loop.last %},{% endif %}
+        {% endfor %} {
         transform: translate({{2*go_X}}%, -5%) scale({{1-2*go_H/100}}) skew(0deg, {{go_T}}deg);
         opacity: 0;
         z-index: 0;
         visibility: hidden;
         transition: all 0.4s ease;
-      }
+        }
 
 /*       left 2 */
-      {% for item in module.media_info %}
+        {% for item in module.media_info %}
         {% set itemID = loop.index %}
         {% set playID = loop.index|int - 2 %}
         {% if playID < 1 %}
-          {% if count_videos <= display_videos %}
+            {% if count_videos <= display_videos %}
             {% set playID = display_videos + playID %}
-          {% elif count_videos == display_videos + 1 %}
+            {% elif count_videos == display_videos + 1 %}
             {% set playID = 1 + display_videos - playID %}
-          {% elif playID < 1 %}
+            {% elif playID < 1 %}
             {% set playID = count_videos + playID %}
-          {% endif %}
+            {% endif %}
         {% endif %}
-        #item-{{ itemID }}:checked ~ .cards #play-{{ playID }}{% if !loop.last %},{% endif %}
-      {% endfor %} {
+        #item-{{ itemID }}:checked ~ .video-gallery-slider__cards #play-{{ playID }}{% if !loop.last %},{% endif %}
+        {% endfor %} {
         transform: translate(-{{2*go_X}}%, -5%) scale({{1-2*go_H/100}}) skew(0deg, -{{go_T}}deg);
         opacity: 0;
         z-index: 0;
         visibility: hidden;
         transition: all 0.4s ease;
-      }
+        }
 
     {% endif %}
 
 /*     right 1 */
     {% for item in module.media_info %}
-      {% set itemID = loop.index %}
-      {% set playID = loop.index|int + 1 %}
-      {% if playID > display_videos %}
+        {% set itemID = loop.index %}
+        {% set playID = loop.index|int + 1 %}
+        {% if playID > display_videos %}
         {% if count_videos <= display_videos %}
-          {% set playID = playID - display_videos %}
+            {% set playID = playID - display_videos %}
         {% elif count_videos == display_videos + 1 %}
-          {% set playID = playID - display_videos - 1 %}
+            {% set playID = playID - display_videos - 1 %}
         {% elif playID > count_videos %}
-          {% set playID = playID - count_videos %}
+            {% set playID = playID - count_videos %}
         {% endif %}
-      {% endif %}
-      #item-{{ itemID }}:checked ~ .cards #play-{{ playID }}{% if !loop.last %},{% endif %}
+        {% endif %}
+        #item-{{ itemID }}:checked ~ .video-gallery-slider__cards #play-{{ playID }}{% if !loop.last %},{% endif %}
     {% endfor %} {
-      transform: translate({{go_X}}%, -5%) scale({{1-go_H/100}}) skew(0deg, {{go_T}}deg);
-      opacity: 0.4;
-      z-index: 2;
-      visibility: visible;
-      transition: all 0.4s ease;
+        transform: translate({{go_X}}%, -5%) scale({{1-go_H/100}}) skew(0deg, {{go_T}}deg);
+        opacity: 0.4;
+        z-index: 2;
+        visibility: visible;
+        transition: all 0.4s ease;
     }
 
 /*     center */
     {% for item in module.media_info %}
-      {% set itemID = loop.index %}
-      {% set playID = loop.index %}
-      #item-{{ itemID }}:checked ~ .cards #play-{{ playID }}{% if !loop.last %},{% endif %}
+        {% set itemID = loop.index %}
+        {% set playID = loop.index %}
+        #item-{{ itemID }}:checked ~ .video-gallery-slider__cards #play-{{ playID }}{% if !loop.last %},{% endif %}
     {% endfor %} {
-      transform: translate(0, 0) scale(1) skew(0, 0);
-      opacity: 1;
-      z-index: 3;
-      visibility: visible;
-      transition: all 0.4s ease;
+        transform: translate(0, 0) scale(1) skew(0, 0);
+        opacity: 1;
+        z-index: 3;
+        visibility: visible;
+        transition: all 0.4s ease;
     }
 
 /*     left 1 */
     {% for item in module.media_info %}
-      {% set itemID = loop.index %}
-      {% set playID = loop.index|int - 1 %}
-      {% if playID < 1 %}
+        {% set itemID = loop.index %}
+        {% set playID = loop.index|int - 1 %}
+        {% if playID < 1 %}
         {% if count_videos <= display_videos %}
-          {% set playID = display_videos + playID %}
+            {% set playID = display_videos + playID %}
         {% elif count_videos == display_videos + 1 %}
-          {% set playID = 1 + display_videos - playID %}
+            {% set playID = 1 + display_videos - playID %}
         {% elif playID < 1 %}
-          {% set playID = count_videos + playID %}
+            {% set playID = count_videos + playID %}
         {% endif %}
-      {% endif %}
-      #item-{{ itemID }}:checked ~ .cards #play-{{ playID }}{% if !loop.last %},{% endif %}
+        {% endif %}
+        #item-{{ itemID }}:checked ~ .video-gallery-slider__cards #play-{{ playID }}{% if !loop.last %},{% endif %}
     {% endfor %} {
-      transform: translate(-{{go_X}}%, -5%) scale({{1-go_H/100}}) skew(0deg, -{{go_T}}deg);
-      opacity: 0.4;
-      z-index: 2;
-      visibility: visible;
-      transition: all 0.4s ease;
+        transform: translate(-{{go_X}}%, -5%) scale({{1-go_H/100}}) skew(0deg, -{{go_T}}deg);
+        opacity: 0.4;
+        z-index: 2;
+        visibility: visible;
+        transition: all 0.4s ease;
     }
 
-  {% endif %}
-  
-  
+    {% endif %}
+    
+    
 
 /*   center:hover */
-  {% for item in module.media_info %}
-  {% set itemID = loop.index %}
-  {% set playID = loop.index %}
-  #item-{{ itemID }}:checked ~ .cards #play-{{ playID }}:hover img{% if !loop.last %},{% endif %}
-  {% endfor %} {
+    {% for item in module.media_info %}
+    {% set itemID = loop.index %}
+    {% set playID = loop.index %}
+    #item-{{ itemID }}:checked ~ .video-gallery-slider__cards #play-{{ playID }}:hover img{% if !loop.last %},{% endif %}
+    {% endfor %} {
     transition: all 1s ease;
     opacity: 0.4;
     height: 0px;
-  }
+    }
 </style>
 {% end_require_css %}
 
@@ -815,105 +816,106 @@
 <!-- ================ -->
 {% require_js %}
 <script>
-  const total_vids = parseInt( {{count_videos}} );
-  
+    const total_vids = parseInt( {{count_videos}} );
+    
 //   Wheel function =============================================== cards
-  const cards = document.getElementsByClassName("cards")[0];
-  cards.onwheel = function (event) {
+    const cards = document.getElementsByClassName("video-gallery-slider__cards")[0];
+    cards.onwheel = function (event) {
     if (event.shiftKey) {
-      const direction = event.deltaY;
-      if (direction > 0) {
+        const direction = event.deltaY;
+        if (direction > 0) {
         const btns = [...document.querySelectorAll('input[name="slider"]')];
         const current = btns.findIndex(btn => btn.checked);
         const next = current == (total_vids - 1) ? 0 : current + 1;
         btns[(next) % btns.length].checked = true;
-      }
-      else {
+        }
+        else {
         const btns = [...document.querySelectorAll('input[name="slider"]')];
         const current = btns.findIndex(btn => btn.checked);
         const next = current == 0 ? (total_vids - 1) : current - 1;
         btns[(next) % btns.length].checked = true;
-      }
+        }
     }
-  }
-  
+    }
+    
 //   Arrow function ===============================================
-  const button_left = document.getElementById("btn_left");
-  const button_right = document.getElementById("btn_right");
-  
-  button_left.onclick = function () {
+    const button_left = document.getElementById("btn_left");
+    const button_right = document.getElementById("btn_right");
+    
+    button_left.onclick = function () {
     const btns = [...document.querySelectorAll('input[name="slider"]')];
     const current = btns.findIndex(btn => btn.checked);
     const next = current == (total_vids - 1) ? 0 : current + 1;
     btns[(next) % btns.length].checked = true;
-  }
-  
-  button_right.onclick = function () {
+    }
+    
+    button_right.onclick = function () {
     const btns = [...document.querySelectorAll('input[name="slider"]')];
     const current = btns.findIndex(btn => btn.checked);
     const next = current == 0 ? (total_vids - 1) : current - 1;
     btns[(next) % btns.length].checked = true;
-  }
-  
+    }
+    
 //   Video function ===============================================
-  console.log('----------Starting----------');
-  const media = {{module.media_info|tojson}};
-  const card = document.getElementsByClassName("card");
-  const yt_vid = document.getElementsByClassName("yt_vid");
-  const yt_img = document.getElementsByClassName("yt_img");
-  
-  for(i=0;i<card.length;i++){
+    console.log('----------Starting----------');
+    const media = {{module.media_info|tojson}};
+    const card = document.getElementsByClassName("video-gallery-slider__card");
+    const yt_vid = document.getElementsByClassName("video-gallery-slider__yt_vid");
+    const yt_img = document.getElementsByClassName("video-gallery-slider__yt_img");
+    
+    for(i=0;i<card.length;i++){
     
     // ----- On mouse hover event
     card[i].onmouseenter = function(){
 //       console.log("onmouseenter");
-      
-      let original_index = parseInt( this.getAttribute("id").split("-")[1] ) - 1;
-      
+        
+        let original_index = parseInt( this.getAttribute("id").split("-")[1] ) - 1;
+        
 //       // ----- Check if it's emdebed code
-      let code = this.getAttribute("code");
-      if (code == "TRUE") return;
-  
-      // Update "title" attribute
-      let yt_name = yt_img[original_index].getAttribute("title");
-      yt_vid[original_index].setAttribute("title", yt_name);
-      
-      let source = media[original_index].media_url.media_source;
-      
-      if (source == "val_yt") {
+        let code = this.getAttribute("code");
+        if (code == "TRUE") return;
+    
+        // Update "title" attribute
+        let yt_name = yt_img[original_index].getAttribute("title");
+        yt_vid[original_index].setAttribute("title", yt_name);
+        
+        let source = media[original_index].media_url.media_source;
+        
+        if (source == "val_yt") {
         let yt_id = yt_img[original_index].src.split("/")[4];
-  
+    
         // Update "video" url
         yt_vid[original_index].src = "https://www.youtube.com/embed/" + yt_id + "?autoplay=1&mute=1&loop=1&color=white&controls=1&modestbranding=1&playsinline=1&rel=0&enablejsapi=1";
-      } 
-      else if (source == "val_vi") {
+        } 
+        else if (source == "val_vi") {
         let yt_id = yt_img[original_index].src.split("/")[3].split(".jpg")[0];
-      
+        
         // Update "video" url
         yt_vid[original_index].src = "https://player.vimeo.com/video/" + yt_id + "?autoplay=1&loop=1&autopause=0&muted=1&title=0&byline=0&portrait=0";
-      }
-      else if (source == "val_gd") {
+        }
+        else if (source == "val_gd") {
         let yt_id = yt_img[original_index].getAttribute("google_id");
         
         // Update "video" url
         yt_vid[original_index].src = "https://drive.google.com/file/d/"+yt_id+"/preview";
-      }
+        }
     }
     
     // ----- On mouse hover out event
     card[i].onmouseleave = function(){
-      console.log("onmouseleave");
-      let original_index = parseInt( this.getAttribute("id").split("-")[1] ) - 1;
+        console.log("onmouseleave");
+        let original_index = parseInt( this.getAttribute("id").split("-")[1] ) - 1;
 
 //       // ----- Check if it's emdebed code
-      let code = this.getAttribute("code");
-      if (code == "TRUE") return;
-      
-      // ----- Reset "video" url
-      yt_vid[original_index].src = "https://www.youtube.com/embed";
+        let code = this.getAttribute("code");
+        if (code == "TRUE") return;
+        
+        // ----- Reset "video" url
+        yt_vid[original_index].src = "https://www.youtube.com/embed";
     }
-  }
+    }
 
 </script>
 {% end_require_js %}
-
+    
+    
