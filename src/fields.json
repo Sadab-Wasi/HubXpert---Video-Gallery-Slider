@@ -123,7 +123,14 @@
               "color": "#FFFFFF"
             },
             "inherited_value": {
-              "default_value_path": "theme.body_font" 
+              "default_value_path": "theme.body_font",
+              "property_value_paths": {
+                "font": "theme.body_font.font",
+                "fallback": "theme.body_font.fallback",
+                "variant": "theme.body_font.variant",
+                "font_set": "theme.body_font.font_set",
+                "color": "theme.body_font.color"
+              }
             }
           },
           {
@@ -144,7 +151,14 @@
               "color": "#FFFFFF"
             },
             "inherited_value": {
-              "default_value_path": "theme.body_font" 
+              "default_value_path": "theme.body_font",
+              "property_value_paths": {
+                "font": "theme.body_font.font",
+                "fallback": "theme.body_font.fallback",
+                "variant": "theme.body_font.variant",
+                "font_set": "theme.body_font.font_set",
+                "color": "theme.body_font.color"
+              }
             }
           }
         ],
