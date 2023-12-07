@@ -98,7 +98,11 @@
               "opacity": 100
             },
             "inherited_value": {
-              "default_value_path": "theme.primary_color" 
+              "default_value_path": "theme.primary_color",
+              "property_value_paths": {
+                "color": "theme.primary_color.color",
+                "opacity": "theme.primary_color.opacity"
+              }
             }
           },
           {
@@ -183,7 +187,11 @@
           "opacity": 100
         },
         "inherited_value": {
-          "default_value_path": "theme.primary_color" 
+          "default_value_path": "theme.primary_color",
+          "property_value_paths": {
+            "color": "theme.primary_color.color",
+            "opacity": "theme.primary_color.opacity"
+          }
         }
       },
       {
