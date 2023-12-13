@@ -41,6 +41,7 @@
   "categories" : [ "BODY_CONTENT", "FUNCTIONALITY", "MEDIA" ],
   "host_template_types" : [ "PAGE", "BLOG_POST", "BLOG_LISTING" ],
   "module_id" : 147551320128,
+  "icon": "https://drive.google.com/file/d/1A6PRjVBlGyqKXkiXwMS2dNUIWM50q3FN/view?usp=drive_link",
   "label" : "video-gallery-slider",
-  "is_available_for_new_content" : false
+  "is_available_for_new_content" : true
 }
