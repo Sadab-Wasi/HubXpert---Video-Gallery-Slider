@@ -20,7 +20,7 @@
     </div>
     
     {% for item in module.media_info %}
-        <input type="radio" name="slider" id="item-{{ loop.index }}" {% if loop.first %}checked{% endif %} />
+        <input type="radio" name="slider" class="video-gallery-slider__slider"  id="item-{{ loop.index }}" {% if loop.first %}checked{% endif %} />
     {% endfor %}
     
     <div class="video-gallery-slider__cards">
@@ -32,7 +32,7 @@
             {% set id_yt = item.media_url.embed_url.oembed_url|split("/") %}
             {% set id_yt = id_yt[2]|split("?") %}
             {% set id_yt = id_yt[0] %}
-            <label class="video-gallery-slider__card" for="item-{{ loop.index }}" id="play-{{ loop.index }}">
+            <label class="video-gallery-slider__card" for="item-{{ loop.index }}" id="play-{{ loop.index }}" playing="FALSE">
             <img class="video-gallery-slider__yt_img" src="http://img.youtube.com/vi/{{id_yt}}/maxresdefault.jpg" loading="lazy" title="{{ item.media_title }}" alt="{{ item.media_title }}" />
             <div class="video-gallery-slider__youtube-container">
                 <iframe class="video-gallery-slider__yt_vid" src="https://www.youtube.com/embed" title="{{ item.media_title }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -44,7 +44,7 @@
             {% set id_vi = item.media_url.embed_url.oembed_url|split("/") %}
             {% set id_vi = id_vi[2]|split("?") %}
             {% set id_vi = id_vi[0] %}
-            <label class="video-gallery-slider__card" for="item-{{ loop.index }}" id="play-{{ loop.index }}">
+            <label class="video-gallery-slider__card" for="item-{{ loop.index }}" id="play-{{ loop.index }}" playing="FALSE">
             <img class="video-gallery-slider__yt_img" src="https://vumbnail.com/{{id_vi}}.jpg" loading="lazy" title="{{ item.media_title }}" alt="{{ item.media_title }}" />
             <div class="video-gallery-slider__youtube-container">
                 <iframe class="video-gallery-slider__yt_vid" src="https://www.youtube.com/embed" title="" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
@@ -55,7 +55,7 @@
         {% elif item.media_url.media_source == "val_gd" %}
             {% set id_gd = item.media_url.google_shared_link.href|split("/") %}
             {% set id_gd = id_gd[4] %}
-            <label class="video-gallery-slider__card" for="item-{{ loop.index }}" id="play-{{ loop.index }}">
+            <label class="video-gallery-slider__card" for="item-{{ loop.index }}" id="play-{{ loop.index }}" playing="FALSE">
             <img class="video-gallery-slider__yt_img" src="{{ item.media_url.thumbnail_image.src }}" google_id="{{id_gd}}" title="{{ item.media_title }}" alt="{{ item.media_url.thumbnail_image.alt }}" />
             <div class="video-gallery-slider__youtube-container">
                 <iframe class="video-gallery-slider__yt_vid" src="https://www.youtube.com/embed" title="{{ item.media_title }}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
@@ -66,7 +66,7 @@
         
 <!--     IF embeded code -->
         {% else %}
-            <label class="video-gallery-slider__card" for="item-{{ loop.index }}" id="play-{{ loop.index }}" code="TRUE" >
+            <label class="video-gallery-slider__card" for="item-{{ loop.index }}" id="play-{{ loop.index }}" playing="FALSE" code="TRUE" >
             <img class="video-gallery-slider__yt_img" src="{{ item.embed_image.src }}" alt="{{ item.embed_image.alt }}" />
             <div class="video-gallery-slider__youtube-container video-gallery-slider__yt_vid">
                 {{ item.embed_code.embed_html }}
@@ -84,6 +84,7 @@
 <!-- ================= -->
 {% require_css %}
 <style>
+  {% scope_css %}
     * {
     box-sizing: border-box;
     }
@@ -91,94 +92,94 @@
 /*   Arrow Styling =============================================== */
     .video-gallery-slider__button-left,
     .video-gallery-slider__button-right {
-    content: "";
-    position: absolute;
-    padding: 0px;
-    margin: 0px;
-    background: #000;
-    z-index: 100;
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    transition: all 0.2s linear;
-    top: calc(50% - 25px);
-    opacity: 0.2;
-    transition: all 0.1s ease;
+      content: "";
+      position: absolute;
+      padding: 0px;
+      margin: 0px;
+      background: #000;
+      z-index: 100;
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      transition: all 0.2s linear;
+      top: calc(50% - 25px);
+      opacity: 0.2;
+      transition: all 0.1s ease;
     }
     .video-gallery-slider__button-left {
-    left: 2%;
+      left: 2%;
     }
     .video-gallery-slider__button-right {
-    right: 2%;
+      right: 2%;
     }
     /* For tablets: */
     @media only screen and (max-width: 768px) {
-    .video-gallery-slider__button-left, .video-gallery-slider__button-right {
-        top: calc(50% - 20px);
-        height: 40px;
-        width: 40px;
-    }
+      .video-gallery-slider__button-left, .video-gallery-slider__button-right {
+          top: calc(50% - 20px);
+          height: 40px;
+          width: 40px;
+      }
     }
     /* For mobile phones: */
     @media only screen and (max-width: 600px) {
-    .video-gallery-slider__button-left, .video-gallery-slider__button-right {
-        top: calc(50% - 11px);
-        height: 30px;
-        width: 30px;
-    }
+      .video-gallery-slider__button-left, .video-gallery-slider__button-right {
+          top: calc(50% - 11px);
+          height: 30px;
+          width: 30px;
+      }
     }
     
     .video-gallery-slider__button-left::after,
     .video-gallery-slider__button-right::after {
-    content: "";
-    position: absolute;
-    z-index: 101;
-    display: block;
-    width: 25px;
-    height: 25px;
-    border-top: 2px solid #fff;
-    border-left: 2px solid #fff;
-    transition: all 0.1s ease;
+      content: "";
+      position: absolute;
+      z-index: 101;
+      display: block;
+      width: 25px;
+      height: 25px;
+      border-top: 2px solid #fff;
+      border-left: 2px solid #fff;
+      transition: all 0.1s ease;
     }
     .video-gallery-slider__button-left::after {
-    top: 12px;
-    left: 17px;
-    transform: rotate(-45deg);
+      top: 12px;
+      left: 17px;
+      transform: rotate(-45deg);
     }
     .video-gallery-slider__button-right::after {
-    top: 12px;
-    left: 8px;
-    transform: rotate(-225deg);
+      top: 12px;
+      left: 8px;
+      transform: rotate(-225deg);
     }
     /* For tablets: */
     @media only screen and (max-width: 768px) {
-    .video-gallery-slider__button-left::after, .video-gallery-slider__button-right::after {
-        width: 15px;
-        height: 15px;
-    }
-    .video-gallery-slider__button-left::after {
-        top: 11px;
-        left: 15px;
-    }
-    .video-gallery-slider__button-right::after {
-        top: 11px;
-        left: 8px;
-    }
+      .video-gallery-slider__button-left::after, .video-gallery-slider__button-right::after {
+          width: 15px;
+          height: 15px;
+      }
+      .video-gallery-slider__button-left::after {
+          top: 11px;
+          left: 15px;
+      }
+      .video-gallery-slider__button-right::after {
+          top: 11px;
+          left: 8px;
+      }
     }
     /* For mobile phones: */
     @media only screen and (max-width: 600px) {
-    .video-gallery-slider__button-left::after, .video-gallery-slider__button-right::after {
-        width: 12px;
-        height: 12px;
-    }
-    .video-gallery-slider__button-left::after {
-        top: 8px;
-        left: 10px;
-    }
-    .video-gallery-slider__button-right::after {
-        top: 8px;
-        left: 8px;
-    }
+      .video-gallery-slider__button-left::after, .video-gallery-slider__button-right::after {
+          width: 12px;
+          height: 12px;
+      }
+      .video-gallery-slider__button-left::after {
+          top: 8px;
+          left: 10px;
+      }
+      .video-gallery-slider__button-right::after {
+          top: 8px;
+          left: 8px;
+      }
     }
 
     /* .video-gallery-slider__button-left:hover {
@@ -799,15 +800,16 @@
     
 
 /*   center:hover */
-    {% for item in module.media_info %}
+{#     {% for item in module.media_info %}
     {% set itemID = loop.index %}
     {% set playID = loop.index %}
     #item-{{ itemID }}:checked ~ .video-gallery-slider__cards #play-{{ playID }}:hover img{% if !loop.last %},{% endif %}
     {% endfor %} {
-    transition: all 1s ease;
-    opacity: 0.4;
-    height: 0px;
-    }
+      transition: all 1s ease;
+      opacity: 0.4;
+      height: 0px;
+    } #}
+{% end_scope_css %}
 </style>
 {% end_require_css %}
 
@@ -818,23 +820,138 @@
 <script>
     const total_vids = parseInt( {{count_videos}} );
     
+//   Video function ===============================================
+    console.log('----------Starting----------');
+    const media = {{module.media_info|tojson}};
+    const card = document.getElementsByClassName("video-gallery-slider__card");
+    const yt_vid = document.getElementsByClassName("video-gallery-slider__yt_vid");
+    const yt_img = document.getElementsByClassName("video-gallery-slider__yt_img");
+    const radio = document.getElementsByClassName("video-gallery-slider__slider");
+  
+//  Clean all videos
+    const clean_video = () => {
+      for(let i=0;i<card.length;i++){
+        let original_index = parseInt( card[i].getAttribute("id").split("-")[1] ) - 1;
+
+       // ----- Check if it's emdebed code
+        let code = card[i].getAttribute("code");
+        if (code == "TRUE") return;
+        
+        // ----- Reset "video" url
+        yt_vid[original_index].src = "https://www.youtube.com/embed";
+        
+        // --- Reset all Images
+        yt_img[original_index].style.transition= "all 1s ease";
+        yt_img[original_index].style.opacity= "1";
+        yt_img[original_index].style.height= "100%";
+        
+      }
+    }
+    
+    for(let i=0;i<card.length;i++){
+      
+      // ----- On mouse click event
+      card[i].onclick = function(){
+
+  //       // ----- Check if it's center card
+          let center = radio[i].checked;
+          if (!center) {
+            clean_video();
+          }
+          return;
+      }
+      
+
+      // ----- On mouse hover event
+      card[i].onmouseenter = function(){
+  //       console.log("onmouseenter");
+
+          let original_index = parseInt( this.getAttribute("id").split("-")[1] ) - 1;
+
+  //       // ----- Check if it's not center card
+          let center = radio[i].checked;
+          if (!center) {
+            this.setAttribute("playing", "FALSE");
+            
+            yt_img[original_index].style.transition= "all 1s ease";
+            yt_img[original_index].style.opacity= "1";
+            yt_img[original_index].style.height= "100%";
+            
+            return;
+          }
+           // ----- Set Image hover disappear 
+          else {
+            yt_img[original_index].style.transition= "all 1s ease";
+            yt_img[original_index].style.opacity= "0.4";
+            yt_img[original_index].style.height= "0px";
+          }
+
+  //       // ----- Check if it's already playing
+          let playing = this.getAttribute("playing");
+          if (playing == "TRUE") return;
+
+
+  //       // ----- Check if it's emdebed code
+          let code = this.getAttribute("code");
+          if (code == "TRUE") return;
+
+
+          // Update "title" attribute
+          let yt_name = yt_img[original_index].getAttribute("title");
+          yt_vid[original_index].setAttribute("title", yt_name);
+
+          let source = media[original_index].media_url.media_source;
+
+          if (source == "val_yt") {
+            let yt_id = yt_img[original_index].src.split("/")[4];
+
+            // Update "video" url
+            yt_vid[original_index].src = "https://www.youtube.com/embed/" + yt_id + "?autoplay=1&mute=1&loop=1&color=white&controls=1&modestbranding=1&playsinline=1&rel=0&enablejsapi=1";
+
+            // ----- Set playing already
+            this.setAttribute("playing", "TRUE");
+          } 
+          else if (source == "val_vi") {
+            let yt_id = yt_img[original_index].src.split("/")[3].split(".jpg")[0];
+
+            // Update "video" url
+            yt_vid[original_index].src = "https://player.vimeo.com/video/" + yt_id + "?autoplay=1&loop=1&autopause=0&muted=1&title=0&byline=0&portrait=0";
+
+            // ----- Set playing already
+            this.setAttribute("playing", "TRUE");
+          }
+          else if (source == "val_gd") {
+            let yt_id = yt_img[original_index].getAttribute("google_id");
+
+            // Update "video" url
+            yt_vid[original_index].src = "https://drive.google.com/file/d/"+yt_id+"/preview";
+
+            // ----- Set playing already
+            this.setAttribute("playing", "TRUE");
+          }
+      }
+    }
+    
 //   Wheel function =============================================== cards
     const cards = document.getElementsByClassName("video-gallery-slider__cards")[0];
     cards.onwheel = function (event) {
     if (event.shiftKey) {
         const direction = event.deltaY;
         if (direction > 0) {
-        const btns = [...document.querySelectorAll('input[name="slider"]')];
-        const current = btns.findIndex(btn => btn.checked);
-        const next = current == (total_vids - 1) ? 0 : current + 1;
-        btns[(next) % btns.length].checked = true;
+          const btns = [...document.querySelectorAll('input[name="slider"]')];
+          const current = btns.findIndex(btn => btn.checked);
+          const next = current == (total_vids - 1) ? 0 : current + 1;
+          btns[(next) % btns.length].checked = true;
         }
         else {
-        const btns = [...document.querySelectorAll('input[name="slider"]')];
-        const current = btns.findIndex(btn => btn.checked);
-        const next = current == 0 ? (total_vids - 1) : current - 1;
-        btns[(next) % btns.length].checked = true;
+          const btns = [...document.querySelectorAll('input[name="slider"]')];
+          const current = btns.findIndex(btn => btn.checked);
+          const next = current == 0 ? (total_vids - 1) : current - 1;
+          btns[(next) % btns.length].checked = true;
         }
+
+          // ----- Reset "video" url
+          clean_video();
     }
     }
     
@@ -843,78 +960,24 @@
     const button_right = document.getElementById("btn_right");
     
     button_left.onclick = function () {
-    const btns = [...document.querySelectorAll('input[name="slider"]')];
-    const current = btns.findIndex(btn => btn.checked);
-    const next = current == (total_vids - 1) ? 0 : current + 1;
-    btns[(next) % btns.length].checked = true;
+      const btns = [...document.querySelectorAll('input[name="slider"]')];
+      const current = btns.findIndex(btn => btn.checked);
+      const next = current == (total_vids - 1) ? 0 : current + 1;
+      btns[(next) % btns.length].checked = true;
+
+      // ----- Reset "video" url
+      clean_video();
     }
     
     button_right.onclick = function () {
-    const btns = [...document.querySelectorAll('input[name="slider"]')];
-    const current = btns.findIndex(btn => btn.checked);
-    const next = current == 0 ? (total_vids - 1) : current - 1;
-    btns[(next) % btns.length].checked = true;
-    }
-    
-//   Video function ===============================================
-    console.log('----------Starting----------');
-    const media = {{module.media_info|tojson}};
-    const card = document.getElementsByClassName("video-gallery-slider__card");
-    const yt_vid = document.getElementsByClassName("video-gallery-slider__yt_vid");
-    const yt_img = document.getElementsByClassName("video-gallery-slider__yt_img");
-    
-    for(i=0;i<card.length;i++){
-    
-    // ----- On mouse hover event
-    card[i].onmouseenter = function(){
-//       console.log("onmouseenter");
-        
-        let original_index = parseInt( this.getAttribute("id").split("-")[1] ) - 1;
-        
-//       // ----- Check if it's emdebed code
-        let code = this.getAttribute("code");
-        if (code == "TRUE") return;
-    
-        // Update "title" attribute
-        let yt_name = yt_img[original_index].getAttribute("title");
-        yt_vid[original_index].setAttribute("title", yt_name);
-        
-        let source = media[original_index].media_url.media_source;
-        
-        if (source == "val_yt") {
-        let yt_id = yt_img[original_index].src.split("/")[4];
-    
-        // Update "video" url
-        yt_vid[original_index].src = "https://www.youtube.com/embed/" + yt_id + "?autoplay=1&mute=1&loop=1&color=white&controls=1&modestbranding=1&playsinline=1&rel=0&enablejsapi=1";
-        } 
-        else if (source == "val_vi") {
-        let yt_id = yt_img[original_index].src.split("/")[3].split(".jpg")[0];
-        
-        // Update "video" url
-        yt_vid[original_index].src = "https://player.vimeo.com/video/" + yt_id + "?autoplay=1&loop=1&autopause=0&muted=1&title=0&byline=0&portrait=0";
-        }
-        else if (source == "val_gd") {
-        let yt_id = yt_img[original_index].getAttribute("google_id");
-        
-        // Update "video" url
-        yt_vid[original_index].src = "https://drive.google.com/file/d/"+yt_id+"/preview";
-        }
-    }
-    
-    // ----- On mouse hover out event
-    card[i].onmouseleave = function(){
-        console.log("onmouseleave");
-        let original_index = parseInt( this.getAttribute("id").split("-")[1] ) - 1;
+      const btns = [...document.querySelectorAll('input[name="slider"]')];
+      const current = btns.findIndex(btn => btn.checked);
+      const next = current == 0 ? (total_vids - 1) : current - 1;
+      btns[(next) % btns.length].checked = true;
 
-//       // ----- Check if it's emdebed code
-        let code = this.getAttribute("code");
-        if (code == "TRUE") return;
-        
-        // ----- Reset "video" url
-        yt_vid[original_index].src = "https://www.youtube.com/embed";
+      // ----- Reset "video" url
+      clean_video();
     }
-    }
-
 </script>
 {% end_require_js %}
     
